@@ -51,7 +51,7 @@ export default function ContactPage() {
       }
       
       if (data.error) {
-        throw new Error(data.error);
+        throw new Error(typeof data.error === 'string' ? data.error : JSON.stringify(data.error));
       }
       
       setFormStatus({

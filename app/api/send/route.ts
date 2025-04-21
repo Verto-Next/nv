@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     console.log('Attempting to send email...');
     const data = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>', // Use Resend's test sender during development
-      to: ['info@vertonext.com'], // Replace with your email
+      to: ['tayfure@gmail.com'], // Replace with your email
       subject: `Contact Form: ${subject}`,
       reply_to: email,
       text: `
