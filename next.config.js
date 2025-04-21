@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
-  reactStrictMode: true,
   async redirects() {
     return [
       // Redirect old URLs to new ones if needed
@@ -26,7 +24,7 @@ const nextConfig = {
         destination: '/about-us',
       },
     ];
-  }
+  },
 };
 
 module.exports = nextConfig;
