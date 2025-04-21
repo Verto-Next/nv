@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { SessionProvider } from "next-auth/react";
 import Navbar from './Navbar';
 import Footer from './Footer';
+import I18nProvider from '@/app/i18n/I18nProvider';
 
 export default function ClientProviders({ 
   children 
@@ -30,13 +31,15 @@ export default function ClientProviders({
 
   return (
     <SessionProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="bg-gray-50 dark:bg-gray-800 flex-grow">
-          {children}
-        </main>
-        <Footer />
-      </div>
+      <I18nProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="bg-gray-50 dark:bg-gray-800 flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </I18nProvider>
     </SessionProvider>
   );
 }

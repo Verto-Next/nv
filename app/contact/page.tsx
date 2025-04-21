@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { Metadata } from 'next';
+
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -31,6 +33,8 @@ export default function ContactPage() {
     setFormStatus(null);
     
     try {
+      console.log('Submitting form data:', formData);
+      
       const response = await fetch('/api/send', {
         method: 'POST',
         headers: {
@@ -40,9 +44,14 @@ export default function ContactPage() {
       });
       
       const data = await response.json();
+      console.log('API response:', data);
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error(data.error || data.details || 'Failed to send message');
+      }
+      
+      if (data.error) {
+        throw new Error(data.error);
       }
       
       setFormStatus({
@@ -61,7 +70,7 @@ export default function ContactPage() {
       console.error('Error sending message:', error);
       setFormStatus({
         success: false,
-        message: error.message || 'There was an error sending your message. Please try again.'
+        message: `Error: ${error.message || 'There was an error sending your message. Please try again.'}`
       });
     } finally {
       setIsSubmitting(false);

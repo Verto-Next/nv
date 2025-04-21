@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="text-xl font-bold text-blue-600">
-              NextAuth App
+              LyncFirm
             </Link>
             <p className="mt-2 text-sm text-gray-600">
               A Next.js application with Microsoft Active Directory authentication and MySQL
@@ -71,7 +71,7 @@ export default function Footer() {
         
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <span className="text-sm text-gray-600">
-            © {new Date().getFullYear()} NextAuth App. All Rights Reserved.
+            © {new Date().getFullYear()} LyncFirm All Rights Reserved.
           </span>
           <div className="flex mt-4 space-x-6 sm:mt-0">
             <a href="#" className="text-gray-600 hover:text-blue-600">

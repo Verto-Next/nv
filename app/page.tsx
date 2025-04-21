@@ -4,6 +4,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 
 export default function HomePage() {
   const { data: session, status } = useSession();

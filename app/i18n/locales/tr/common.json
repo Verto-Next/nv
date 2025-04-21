@@ -1,0 +1,37 @@
+{
+    "navbar": {
+      "home": "Ana Sayfa",
+      "dashboard": "Kontrol Paneli",
+      "users": "Kullanıcılar",
+      "testDb": "Veritabanı Testi",
+      "apiTest": "API Testi",
+      "contact": "İletişim",
+      "charts": "Grafikler",
+      "signIn": "Giriş Yap",
+      "signOut": "Çıkış Yap"
+    },
+    "common": {
+      "loading": "Yükleniyor...",
+      "error": "Hata",
+      "success": "Başarılı"
+    },
+    "contact": {
+      "title": "Bize Ulaşın",
+      "description": "Sorularınız mı var? Aşağıdaki formu kullanarak veya iletişim bilgilerimiz aracılığıyla bize ulaşabilirsiniz.",
+      "sendMessage": "Mesaj Gönder",
+      "name": "İsim",
+      "email": "E-posta",
+      "subject": "Konu",
+      "message": "Mesaj",
+      "sending": "Gönderiliyor...",
+      "messageSent": "Mesajınız gönderildi. En kısa sürede size dönüş yapacağız!",
+      "messageError": "Mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "footer": {
+      "allRightsReserved": "Tüm Hakları Saklıdır"
+    },
+    "languages": {
+      "turkish": "Türkçe",
+      "english": "İngilizce"
+    }
+  }

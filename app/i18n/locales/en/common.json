@@ -1,0 +1,37 @@
+{
+    "navbar": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "testDb": "Test DB",
+      "apiTest": "API Test",
+      "contact": "Contact",
+      "charts": "Charts",
+      "signIn": "Sign In",
+      "signOut": "Sign Out"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Have questions or need assistance? Feel free to reach out to us using the form below or through our contact information.",
+      "sendMessage": "Send Message",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "sending": "Sending...",
+      "messageSent": "Your message has been sent. We will get back to you soon!",
+      "messageError": "There was an error sending your message. Please try again."
+    },
+    "footer": {
+      "allRightsReserved": "All Rights Reserved"
+    },
+    "languages": {
+      "turkish": "Turkish",
+      "english": "English"
+    }
+  }
