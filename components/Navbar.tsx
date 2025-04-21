@@ -157,6 +157,15 @@ export default function Navbar() {
                 }`}>
                 {t('navbar.charts')}
               </Link>
+
+                <Link href="/api-logs" 
+                className={`px-3 py-2 text-sm font-medium rounded-md ${
+                  isActive('/api-logs') 
+                   ? 'bg-gray-100 text-black font-bold' 
+                  : 'text-gray-800 hover:bg-gray-50'
+                }`}>
+              {t('navbar.apiLogs')}
+            </Link>              
             </div>
           </div>
           

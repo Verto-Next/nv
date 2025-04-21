@@ -1,20 +1,33 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function ApiTestPage() {
+  const { data: session } = useSession();
   const [inputText, setInputText] = useState('');
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [method, setMethod] = useState<'GET' | 'POST'>('GET');
+  const [loggingStatus, setLoggingStatus] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setResponseData(null);
+    setLoggingStatus(null);
+    
+    const startTime = performance.now();
+    let apiResponse;
+    let statusCode;
+    let responseBody;
     
     try {
+      console.log('Submitting API request...');
       let response;
+      
+      const requestData = method === 'POST' ? { text: inputText } : { text: inputText };
       
       if (method === 'GET') {
         const url = `/api/echo?text=${encodeURIComponent(inputText)}`;
@@ -25,17 +38,64 @@ export default function ApiTestPage() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ text: inputText }),
+          body: JSON.stringify(requestData),
         });
       }
       
-      const data = await response.json();
-      setResponseData(data);
+      statusCode = response.status;
+      responseBody = await response.json();
+      setResponseData(responseBody);
+      
+      // Calculate execution time
+      const endTime = performance.now();
+      const executionTimeMs = Math.round(endTime - startTime);
+      
+      // Log the API call
+      await logApiCall({
+        endpoint: '/api/echo',
+        method: method,
+        requestData: requestData,
+        responseData: responseBody,
+        statusCode: statusCode,
+        executionTimeMs: executionTimeMs
+      });
+      
+      setLoggingStatus('Logged successfully');
     } catch (error) {
       console.error('Error calling API:', error);
       setResponseData({ error: 'Failed to call API' });
+      setLoggingStatus('Failed to log API call');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Function to log API call to our database
+  const logApiCall = async (logData: {
+    endpoint: string;
+    method: string;
+    requestData: any;
+    responseData: any;
+    statusCode: number;
+    executionTimeMs: number;
+  }) => {
+    try {
+      const response = await fetch('/api/log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to log API call');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error logging API call:', error);
+      setLoggingStatus('Failed to log API call');
     }
   };
 
@@ -106,10 +166,22 @@ export default function ApiTestPage() {
             <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
               {JSON.stringify(responseData, null, 2)}
             </pre>
+            
+            {loggingStatus && (
+              <div className={`mt-4 p-2 rounded ${loggingStatus.includes('Failed') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                {loggingStatus}
+              </div>
+            )}
           </div>
         ) : (
           <p className="text-gray-500">Send a request to see the response</p>
         )}
+      </div>
+      
+      <div className="mt-6">
+        <Link href="/api-logs" className="text-blue-600 hover:underline">
+          View API Call History
+        </Link>
       </div>
     </div>
   );
